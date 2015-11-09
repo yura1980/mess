@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.beingjavaguys.model.Table1;
+import com.beingjavaguys.model.SprAvtors;
+import org.hibernate.FlushMode;
 
 public class DataDaoImpl implements DataDao {
 
@@ -25,6 +27,17 @@ public class DataDaoImpl implements DataDao {
 		session.close();
 		return false;
 	}
+        
+        @Override
+	public SprAvtors addEntityAut(SprAvtors au) throws Exception {
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
+                session.setFlushMode(FlushMode.COMMIT);
+		session.save(au);
+		tx.commit();
+		session.close();                
+		return au;
+	}
 
 	@Override
 	public Table1 getEntityById(long id) throws Exception {
@@ -42,6 +55,17 @@ public class DataDaoImpl implements DataDao {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		List<Table1> employeeList = session.createCriteria(Table1.class).list();
+		tx.commit();
+		session.close();
+		return employeeList;
+	}
+        
+        @SuppressWarnings("unchecked")
+	@Override
+	public List<SprAvtors> getEntityListAu() throws Exception {
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
+		List<SprAvtors> employeeList = session.createCriteria(SprAvtors.class).list();
 		tx.commit();
 		session.close();
 		return employeeList;

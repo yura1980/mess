@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.beingjavaguys.dao.DataDao;
+import com.beingjavaguys.model.SprAvtors;
 import com.beingjavaguys.model.Table1;
 
 public class DataServicesImpl implements DataServices {
@@ -16,6 +17,11 @@ public class DataServicesImpl implements DataServices {
 	public boolean addEntity(Table1 ms) throws Exception {
 		return dataDao.addEntity(ms);
 	}
+        
+        @Override
+	public SprAvtors addEntityAut(SprAvtors au) throws Exception {
+		return dataDao.addEntityAut(au);
+	}
 
 	@Override
 	public Table1 getEntityById(long id) throws Exception {
@@ -25,6 +31,11 @@ public class DataServicesImpl implements DataServices {
 	@Override
 	public List<Table1> getEntityList() throws Exception {
 		return dataDao.getEntityList();
+	}
+        
+        @Override
+	public List<SprAvtors> getEntityListAu() throws Exception {
+		return dataDao.getEntityListAu();
 	}
 
 	@Override

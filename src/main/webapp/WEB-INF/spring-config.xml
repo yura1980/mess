@@ -28,6 +28,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.beingjavaguys.model.Table1</value>
+                <value>com.beingjavaguys.model.SprAvtors</value>
             </list>
         </property>
         <property name="hibernateProperties">

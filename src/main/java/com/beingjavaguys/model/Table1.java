@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -23,14 +25,18 @@ public class Table1 implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "avtor")
-    private String avtor;
+//    @Column(name = "avtor")
+//    private String avtor;
 
     @Column(name = "text")
     private String text;
 
     @Column(name = "timez")
     private Date timez;
+    
+    @JoinColumn(name = "spr_avtors_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private SprAvtors sprAvtorsId;
 
     public long getId() {
         return id;
@@ -40,13 +46,13 @@ public class Table1 implements Serializable {
         this.id = id;
     }
 
-    public String getAvtor() {
-        return avtor;
-    }
-
-    public void setAvtor(String avtor) {
-        this.avtor = avtor;
-    }
+//    public String getAvtor() {
+//        return avtor;
+//    }
+//
+//    public void setAvtor(String avtor) {
+//        this.avtor = avtor;
+//    }
 
     public String getText() {
         return text;
@@ -62,6 +68,14 @@ public class Table1 implements Serializable {
 
     public void setTimez(Date timez) {
         this.timez = timez;
+    }
+    
+    public SprAvtors getSprAvtorsId() {
+        return sprAvtorsId;
+    }
+
+    public void setSprAvtorsId(SprAvtors sprAvtorsId) {
+        this.sprAvtorsId = sprAvtorsId;
     }
 
 }

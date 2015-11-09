@@ -46,7 +46,7 @@
                        href="#" ng-repeat="it in pagedItems[currentPage-1]" ng-mouseenter="setItem(it)" ng-click="setItem(it)"
                         data-toggle="modal" data-target="#myModal"> 
                         <span class="badge" >{{it.id}}</span> 
-                        <h4>{{it.avtor}}</h4>
+                        <h4>{{it.sprAvtorsId.avtor}}</h4>
                         <hr/>
                         <pre style="float: right; width: 200px">Время: {{it.timez | date:'dd.MM.yyyy HH:mm'}}</pre>
                         <p class="list-group-item-text">
@@ -58,7 +58,7 @@
                                 ng-model="currentPage" max-size="maxSize" class="pagination-lg" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
             </div>
             <div class="col-md-4" >
-                <pre><label>Автор:</label> {{ scrum.avtor}}<p><label>Запись от:</label> {{scrum.timez | date:'dd.MM.yyyy HH:mm'}}</p><p><label>Ваш текст:</label> {{ scrum.text}}</p></pre>
+                <pre><label>Автор:</label> {{ scrum.sprAvtorsId.avtor}}<p><label>Запись от:</label> {{scrum.timez | date:'dd.MM.yyyy HH:mm'}}</p><p><label>Ваш текст:</label> {{ scrum.text}}</p></pre>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="add()">Добавить</button>
             </div>
             
@@ -75,10 +75,12 @@
                             <form role="form">
                                 <div class="form-group">
                                     <label for="avt">Автор:</label>
-                                    <input id="avt" type="search" autosave="some_unique_value" name="s" placeholder="Автор" results="5" name="avtorsearch" ng-model="scrum.avtor" class="form-control" autofocus list="avtor">        
-                                    <datalist style="overflow:scroll;" id="avtor">            
-                                        <option  ng-repeat="it in items" label="{{ it.avtor}}" value="{{ it.avtor}}"></option>            
-                                    </datalist>
+                                    <input id="avt" type="" autosave="some_unique_value" name="s" 
+                                           placeholder="Автор" results="5" name="avtorsearch" 
+                                           ng-model="scrum.sprAvtorsId.avtor" class="form-control" autofocus list="avtor">        
+                                    <datalist style="overflow:scroll;" id="avtor">                                         
+                                        <option  ng-repeat="it in itemsAu" value="{{it.avtor}}"></option>                                        
+                                    </datalist>                                  
                                 </div>                    
                                 <div class="form-group">
                                     <label for="prim">Ваш текст:</label>

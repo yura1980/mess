@@ -1,5 +1,6 @@
 package com.beingjavaguys.controller;
 
+import com.beingjavaguys.model.SprAvtors;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -28,6 +29,12 @@ public class RestController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Status addEmployee(@RequestBody Table1 ms) {
         try {
+            if(ms.getSprAvtorsId().getId()<0){
+                SprAvtors au = new SprAvtors();
+                au.setAvtor(ms.getSprAvtorsId().getAvtor());
+                au = dataServices.addEntityAut(au);
+                ms.setSprAvtorsId(au);
+            }
             dataServices.addEntity(ms);
             return new Status(1, "Messege added Successfully !");
         } catch (Exception e) {
@@ -55,6 +62,19 @@ public class RestController {
         List<Table1> msList = null;
         try {
             msList = dataServices.getEntityList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return msList;
+    }
+    
+    @RequestMapping(value = "/listAu", method = RequestMethod.GET)
+    public @ResponseBody List<SprAvtors> getEmployeeAu() {
+
+        List<SprAvtors> msList = null;
+        try {
+            msList = dataServices.getEntityListAu();
         } catch (Exception e) {
             e.printStackTrace();
         }
